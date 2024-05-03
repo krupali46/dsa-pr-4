@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Linked {
+            constructor(d) {
+                this.head = {
+                    data: d,
+                    prev: null,
+                    next: null
+                };
+                this.tail = this.head;
+                this.size = 1;
+            }
+
+            addList(value) {
+                let newNode = {
+                    data: value,
+                    prev: this.tail,
+                    next: null
+                };
+                this.tail.next = newNode;
+                this.tail = newNode;
+                this.size++;
+            }
+
+            deleteMiddle() {
+                let mid = Math.round(this.size/2);
+                let current = this.head;
+                while (current) {
+                    if (current.data == mid) {
+                        if (current == this.head) {
+                            if (this.size === 1) {
+                                this.head = null;
+                                this.tail = null;
+                            } else {
+                                this.head = current.next;
+                                this.head.prev = null;
+                            }
+                        } else if (current === this.tail) {
+                            this.tail = current.prev;
+                            this.tail.next = null;
+                        } else {
+                            current.prev.next = current.next;
+                            current.next.prev = current.prev;
+                        }
+
+                        this.size--;
+                        return;
+                    }
+
+                    current = current.next;
+                }
+            }
+       
+        }
+
+        let list = new Linked(1);
+        list.addList(2);
+        list.addList(3);
+        list.addList(4);
+        list.addList(5);
+
+  
+        console.log("list :", list);
+      
+        console.log("Delet linked list:", list.deleteMiddle());
+        // list.deleteMiddle();
+        console.log(list);
+
+
+
+    </script>
+</body>
+
+</html>

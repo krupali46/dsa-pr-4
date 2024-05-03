@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Stack {
+
+            constructor(limit) {
+
+                this.queue = [];
+                this.queue.length;
+                this.limit = limit || 10;
+            }
+
+            enquee(d) {
+
+                if (this.queue.length < this.limit) {
+                    this.queue.push(d);
+                } else {
+                    console.log("stack is full");
+                }
+            }
+
+            Reverse1() {
+                let stack2 = [];
+
+                while (this.queue.length > 0) {
+                    stack2.push(this.queue.pop());
+                }
+                return stack2;
+
+            }
+            deleteMiddle() {
+                let stack2 = [];
+                let mid = Math.floor(this.queue.length / 2);
+                for (let i = 0; i < mid; i++) {
+                    stack2.push(this.queue.pop());
+                }
+                this.queue.pop();
+                console.log("stack2 ",stack2);
+                console.log("queue",this.queue);
+
+                for (let j = 0; j < mid; j++) {
+                    this.queue.push(stack2.pop());
+                }
+                return this.queue;
+            } 
+
+            sortStack() {
+                let stack2 = [];
+
+                while (this.queue.length > 0) {
+                    let temp = this.queue.pop();
+                    while (stack2.length > 0 && stack2[stack2.length - 1] > temp) {
+                        this.queue.push(stack2.pop());
+                    }
+                    stack2.push(temp);
+                }
+                this.queue = stack2;
+                return this.queue;
+
+            }
+            
+        }
+        let r = new Stack(5);
+        r.enquee(1);
+        r.enquee(6);
+        r.enquee(5);
+        r.enquee(3);
+        r.enquee(7);
+        console.log("delet middle",r.deleteMiddle());
+        console.log("short",r.sortStack());
+        console.log("reverse ",r.Reverse1());
+
+
+    </script>
+</body>
+
+</html>
